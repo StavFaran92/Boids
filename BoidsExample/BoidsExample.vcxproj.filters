@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Src">
+      <UniqueIdentifier>{9583e3a1-0011-4413-85ed-5b3dd7776573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Rules">
+      <UniqueIdentifier>{1958d370-eb60-4156-ae6e-517b1495e430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Utils">
+      <UniqueIdentifier>{29f5721c-cf05-44b5-a23d-549a20b27c9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\GUI">
+      <UniqueIdentifier>{baca1cd9-2cce-4fc9-9513-d1bba63153ff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CohesionRule.cpp">
+      <Filter>Src\Rules</Filter>
+    </ClCompile>
+    <ClCompile Include="Boid.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Flock.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Src\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="AlignmentRule.cpp">
+      <Filter>Src\Rules</Filter>
+    </ClCompile>
+    <ClCompile Include="SeperationRule.cpp">
+      <Filter>Src\Rules</Filter>
+    </ClCompile>
+    <ClCompile Include="BoidsFactory.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="CohesionController.cpp">
+      <Filter>Src\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SeperationController.cpp">
+      <Filter>Src\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicController.cpp">
+      <Filter>Src\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AlignmentController.cpp">
+      <Filter>Src\GUI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CohesionRule.h">
+      <Filter>Src\Rules</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule.h">
+      <Filter>Src\Rules</Filter>
+    </ClInclude>
+    <ClInclude Include="Flock.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Boid.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="AlignmentRule.h">
+      <Filter>Src\Rules</Filter>
+    </ClInclude>
+    <ClInclude Include="SeperationRule.h">
+      <Filter>Src\Rules</Filter>
+    </ClInclude>
+    <ClInclude Include="BoidsFactory.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="CohesionController.h">
+      <Filter>Src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SeperationController.h">
+      <Filter>Src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicController.h">
+      <Filter>Src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AlignmentController.h">
+      <Filter>Src\GUI</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
