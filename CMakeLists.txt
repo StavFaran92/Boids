@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 # set the project name
 project(BoidsExample
 	VERSION 1.0
-    DESCRIPTION "A brief CMake experiment"
+    DESCRIPTION "Boids simulation"
     LANGUAGES CXX)
 
 set(SOURCE_FILES 
@@ -35,41 +35,52 @@ set(SOURCE_FILES
 	BoidsExample/SeperationRule.cpp)
 
 # add the executable
-add_executable(BoidsExample ${SOURCE_FILES})
+add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT BoidsExample)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+set(SFML_DIR extern/SFML)
+
+set(SFML_BUILD_WINDOW TRUE)
+set(SFML_BUILD_GRAPHICS TRUE)
+set(SFML_BUILD_AUDIO FALSE)
+set(SFML_BUILD_NETWORK FALSE)
+set(SFML_BUILD_DOC FALSE)
+set(SFML_BUILD_EXAMPLES FALSE)
+
+set(TGUI_DIR extern/TGUI)
+set(TGUI_BUILD_GUI_BUILDER FALSE)
+
+set(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE )
+
+
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    target_compile_options(BoidsExample PRIVATE /W4)
+    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE /W4)
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    target_compile_options(BoidsExample PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic)
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    # other macOS-specific flags for Clang
 endif()
 
-target_include_directories(BoidsExample PRIVATE 
-	D:/3rd-party/SFML/build/include 
-	D:/3rd-party/TGUI/build/include)
 
-find_library(LIBRARY_SFML_SYSTEM sfml-system.lib)
-find_library(LIBRARY_SFML_GRAPHICS sfml-graphics.lib)
-find_library(LIBRARY_SFML_WINDOW sfml-window.lib)
 
-if (LIBRARY_SFML_SYSTEM AND LIBRARY_SFML_GRAPHICS AND LIBRARY_SFML_WINDOW)
-    target_link_libraries(BoidsExample PRIVATE ${LIBRARY_SFML_SYSTEM})
-    target_link_libraries(BoidsExample PRIVATE ${LIBRARY_SFML_GRAPHICS})
-    target_link_libraries(BoidsExample PRIVATE ${LIBRARY_SFML_WINDOW})
-else()
-    message(FATAL_ERROR "Could not find SFML")
-endif()
+add_subdirectory(${SFML_DIR})
+add_subdirectory(${TGUI_DIR})
 
-find_library(LIBRARY_TGUI tgui.lib)
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${SFML_DIR}/include)
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${TGUI_DIR}/include)
 
-if (LIBRARY_TGUI)
-    target_link_libraries(BoidsExample PRIVATE ${LIBRARY_TGUI})
-else()
-    message(FATAL_ERROR "Could not find TGUI")
-endif()
+link_directories(${SFML_DIR}/lib/$<CONFIGURATION>)
+link_directories(${TGUI_DIR}/lib/$<CONFIGURATION>)
 
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE sfml-system)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE sfml-graphics)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE sfml-window)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE tgui)
+
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:${CMAKE_PROJECT_NAME}> $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>
+  COMMAND_EXPAND_LISTS
+  )

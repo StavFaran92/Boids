@@ -26,7 +26,7 @@ void Boid::init()
 {
 	m_shape = std::make_shared<sf::CircleShape>(m_size, 3);
 	m_shape->setFillColor(m_color);
-	m_shape->setOrigin(m_size, m_size);
+	m_shape->setOrigin({ m_size, m_size });
 }
 
 void Boid::joinFlock(std::shared_ptr<Flock> flock)
